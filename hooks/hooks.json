@@ -1,0 +1,17 @@
+{
+  "description": "moon-devkit plugin hooks",
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo '[moon-devkit] Plugin loaded. Skills: commit-with-review, feature-planner | MCP: terraform | Run /help for more.'",
+            "timeout": 3
+          }
+        ]
+      }
+    ]
+  }
+}

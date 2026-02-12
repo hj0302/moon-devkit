@@ -1,0 +1,9 @@
+{
+  "name": "moon-devkit",
+  "version": "1.0.0",
+  "description": "OMC companion plugin: custom skills, Terraform MCP server, and full-stack development ecosystem guide",
+  "author": { "name": "moon" },
+  "repository": "https://github.com/moon/moon-devkit",
+  "license": "MIT",
+  "keywords": ["omc", "claude-code", "mcp", "full-stack", "context7", "terraform"]
+}
