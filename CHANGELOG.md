@@ -10,4 +10,6 @@ All notable changes to this project will be documented in this file.
 - `skill-creator` skill: Guided skill creation with scaffolding and packaging scripts
 - Terraform MCP server: Infrastructure-as-code assistance
 - SessionStart hook: Environment validation and plugin intro
+- `plugins.json`: Full environment manifest (9 plugins, 5 marketplaces)
+- `scripts/setup.sh`: One-line environment setup script
 - Full OMC ecosystem setup guide (README)

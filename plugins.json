@@ -1,0 +1,88 @@
+{
+  "description": "moon's Claude Code environment manifest",
+  "version": "1.0.0",
+  "updated": "2026-02-12",
+  "marketplaces": [
+    {
+      "name": "claude-plugins-official",
+      "source": "anthropics/claude-plugins-official",
+      "description": "Anthropic 공식 플러그인"
+    },
+    {
+      "name": "omc",
+      "source": "Yeachan-Heo/oh-my-claudecode",
+      "description": "OMC 멀티에이전트 오케스트레이션"
+    },
+    {
+      "name": "claude-code-workflows",
+      "source": "wshobson/agents",
+      "description": "개발 도구 플러그인 모음"
+    },
+    {
+      "name": "team-attention-plugins",
+      "source": "team-attention/plugins-for-claude-natives",
+      "description": "세션 관리 플러그인"
+    },
+    {
+      "name": "moon-devkit",
+      "source": "hj0302/moon-devkit",
+      "description": "커스텀 스킬 + Terraform MCP"
+    }
+  ],
+  "plugins": [
+    {
+      "name": "oh-my-claudecode",
+      "marketplace": "omc",
+      "description": "멀티에이전트 오케스트레이션 코어",
+      "priority": 1
+    },
+    {
+      "name": "moon-devkit",
+      "marketplace": "moon-devkit",
+      "description": "커스텀 스킬 + Terraform MCP",
+      "priority": 2
+    },
+    {
+      "name": "Notion",
+      "marketplace": "claude-plugins-official",
+      "description": "Notion 워크스페이스 통합",
+      "priority": 3
+    },
+    {
+      "name": "coderabbit",
+      "marketplace": "claude-plugins-official",
+      "description": "AI 코드 리뷰",
+      "priority": 3
+    },
+    {
+      "name": "backend-development",
+      "marketplace": "claude-code-workflows",
+      "description": "API 설계, 마이크로서비스, 이벤트 소싱",
+      "priority": 4
+    },
+    {
+      "name": "cloud-infrastructure",
+      "marketplace": "claude-code-workflows",
+      "description": "Terraform, Kubernetes, 멀티클라우드",
+      "priority": 4
+    },
+    {
+      "name": "code-review-ai",
+      "marketplace": "claude-code-workflows",
+      "description": "아키텍처 리뷰",
+      "priority": 4
+    },
+    {
+      "name": "security-scanning",
+      "marketplace": "claude-code-workflows",
+      "description": "SAST, 위협 모델링",
+      "priority": 4
+    },
+    {
+      "name": "session-wrap",
+      "marketplace": "team-attention-plugins",
+      "description": "세션 종료 시 분석 및 문서화",
+      "priority": 5
+    }
+  ]
+}

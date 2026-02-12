@@ -1,9 +1,49 @@
 # moon-devkit
 
 OMC(oh-my-claudecode) 기반 풀스택 개발 환경 플러그인.
-커스텀 스킬 + Terraform MCP + 생태계 가이드를 하나로 묶어 제공합니다.
+커스텀 스킬 + Terraform MCP + 전체 환경 자동 설치를 제공합니다.
 
-## What's Included
+## One-Line Setup
+
+새 환경에서 전체 플러그인 환경을 한 번에 설치:
+
+```bash
+curl -sL https://raw.githubusercontent.com/hj0302/moon-devkit/main/scripts/setup.sh | bash
+```
+
+또는 로컬에서:
+```bash
+git clone https://github.com/hj0302/moon-devkit.git
+bash moon-devkit/scripts/setup.sh
+```
+
+## What Gets Installed
+
+### Marketplaces (5개)
+| Marketplace | Source | Description |
+|-------------|--------|-------------|
+| claude-plugins-official | anthropics/claude-plugins-official | Anthropic 공식 플러그인 |
+| omc | Yeachan-Heo/oh-my-claudecode | OMC 멀티에이전트 오케스트레이션 |
+| claude-code-workflows | wshobson/agents | 개발 도구 플러그인 모음 |
+| team-attention-plugins | team-attention/plugins-for-claude-natives | 세션 관리 플러그인 |
+| moon-devkit | hj0302/moon-devkit | 커스텀 스킬 + Terraform MCP |
+
+### Plugins (9개, 설치 순서)
+| Priority | Plugin | Marketplace | Description |
+|----------|--------|-------------|-------------|
+| 1 | `oh-my-claudecode` | omc | 멀티에이전트 오케스트레이션 코어 |
+| 2 | `moon-devkit` | moon-devkit | 커스텀 스킬 + Terraform MCP |
+| 3 | `Notion` | claude-plugins-official | Notion 워크스페이스 통합 |
+| 3 | `coderabbit` | claude-plugins-official | AI 코드 리뷰 |
+| 4 | `backend-development` | claude-code-workflows | API 설계, 마이크로서비스, 이벤트 소싱 |
+| 4 | `cloud-infrastructure` | claude-code-workflows | Terraform, Kubernetes, 멀티클라우드 |
+| 4 | `code-review-ai` | claude-code-workflows | 아키텍처 리뷰 |
+| 4 | `security-scanning` | claude-code-workflows | SAST, 위협 모델링 |
+| 5 | `session-wrap` | team-attention-plugins | 세션 종료 시 분석 및 문서화 |
+
+전체 매니페스트: [`plugins.json`](plugins.json)
+
+## What's Included in moon-devkit
 
 | Category | Item | Description |
 |----------|------|-------------|
@@ -12,57 +52,8 @@ OMC(oh-my-claudecode) 기반 풀스택 개발 환경 플러그인.
 | Skill | `skill-creator` | Claude Code 스킬 생성 가이드 (스캐폴딩 + 패키징) |
 | MCP | Terraform | HashiCorp Terraform IaC 지원 |
 | Hook | SessionStart | 환경 검증 + 플러그인 소개 메시지 |
-
-## Quick Setup
-
-### 1. OMC 코어 (Core)
-```bash
-/plugin install oh-my-claudecode@omc
-```
-
-### 2. moon-devkit (이 플러그인)
-```bash
-/plugin marketplace add moon/moon-devkit
-/plugin install moon-devkit@moon-devkit
-```
-
-### 3. 개발 도구 플러그인 (Development Tools)
-```bash
-# Python / Cloud / Backend / Security / Code Review
-/plugin install python-development@claude-code-workflows
-/plugin install cloud-infrastructure@claude-code-workflows
-/plugin install backend-development@claude-code-workflows
-/plugin install security-scanning@claude-code-workflows
-/plugin install code-review-ai@claude-code-workflows
-
-# LLM/RAG / Spec-driven / CI-CD
-/plugin install llm-application-dev@claude-code-workflows
-/plugin install conductor@claude-code-workflows
-/plugin install cicd-automation@claude-code-workflows
-```
-
-### 4. 공식 플러그인 (Official Plugins)
-```bash
-/plugin install Notion@claude-plugins-official
-/plugin install coderabbit@claude-plugins-official
-/plugin install github@claude-plugins-official
-/plugin install playwright@claude-plugins-official
-```
-
-### 5. 커뮤니티 & 외부 마켓플레이스 (Community)
-```bash
-# Context7 — 자동 라이브러리 문서 조회
-/plugin install context7@context7
-
-# Session wrap-up
-/plugin install session-wrap@team-attention-plugins
-
-# 외부 마켓플레이스 추가
-/plugin marketplace add davila7/claude-code-templates
-/plugin marketplace add f/prompts.chat
-/plugin marketplace add upstash/context7
-# obra/superpowers-marketplace — 이미 등록된 경우 생략
-```
+| Script | `setup.sh` | 전체 환경 원클릭 설치 |
+| Manifest | `plugins.json` | 플러그인/마켓플레이스 매니페스트 |
 
 ## Skills Usage
 
@@ -120,11 +111,15 @@ IaC 리소스 관리, plan/apply 워크플로우, 모듈 작성을 지원합니�
 ```
 moon-devkit/
 ├── .claude-plugin/
-│   └── plugin.json          # 플러그인 메타데이터
-├── .mcp.json                # Terraform MCP
+│   ├── plugin.json           # 플러그인 메타데이터
+│   └── marketplace.json      # 마켓플레이스 레지스트리
+├── .mcp.json                 # Terraform MCP
+├── plugins.json              # 전체 환경 매니페스트
+├── scripts/
+│   └── setup.sh              # 원클릭 환경 설치
 ├── skills/
 │   ├── commit-with-review/
-│   │   └── SKILL.md         # 리뷰+커밋 스킬
+│   │   └── SKILL.md          # 리뷰+커밋 스킬
 │   ├── feature-planner/
 │   │   ├── SKILL.md          # 피처 계획 스킬
 │   │   └── plan-template.md  # 계획 문서 템플릿
@@ -142,6 +137,7 @@ moon-devkit/
 
 - **OMC 동반자**: OMC 코어 위에 보완 역할만 수행 (중복 제로)
 - **MCP 최소화**: Terraform만 번들 (Context7은 별도 플러그인으로 설치)
+- **환경 재현성**: plugins.json + setup.sh로 새 환경 즉시 구축
 - **비밀키 외부화**: 환경변수만 사용, 하드코딩 없음
 - **한영 이중 언어**: 스킬 트리거에 한국어/영어 병기
 
@@ -152,6 +148,10 @@ moon-devkit/
 | GitHub MCP | GitHub 플러그인 (`@claude-plugins-official`) |
 | Sequential Thinking MCP | OMC architect/analyst/critic 에이전트 |
 | claude-mem | OMC 네이티브 메모리 (notepad/project-memory) |
+
+## Customization
+
+`plugins.json`을 수정하여 플러그인을 추가/제거한 후 `setup.sh`를 다시 실행하면 됩니다.
 
 ## License
 
