@@ -1,0 +1,22 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "moon-devkit",
+  "description": "OMC companion plugin: custom skills, Terraform MCP, and full-stack development ecosystem guide",
+  "owner": {
+    "name": "moon"
+  },
+  "plugins": [
+    {
+      "name": "moon-devkit",
+      "description": "OMC companion plugin with commit-with-review, feature-planner, skill-creator skills, Terraform MCP server, and full-stack development ecosystem guide",
+      "version": "1.0.0",
+      "author": {
+        "name": "moon"
+      },
+      "source": "./",
+      "category": "productivity",
+      "homepage": "https://github.com/hj0302/moon-devkit",
+      "tags": ["omc", "claude-code", "mcp", "full-stack", "terraform"]
+    }
+  ]
+}
