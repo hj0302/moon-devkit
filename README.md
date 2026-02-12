@@ -9,6 +9,7 @@ OMC(oh-my-claudecode) 기반 풀스택 개발 환경 플러그인.
 |----------|------|-------------|
 | Skill | `commit-with-review` | CodeRabbit 리뷰 후 구조화된 커밋 |
 | Skill | `feature-planner` | TDD 품질 게이트 + conductor 패턴 기반 피처 계획 |
+| Skill | `skill-creator` | Claude Code 스킬 생성 가이드 (스캐폴딩 + 패키징) |
 | MCP | Terraform | HashiCorp Terraform IaC 지원 |
 | Hook | SessionStart | 환경 검증 + 플러그인 소개 메시지 |
 
@@ -90,6 +91,19 @@ User: plan feature user authentication
 - TDD 품질 게이트: Red-Green-Refactor 사이클 강제
 - 단계별 롤백 전략 포함
 
+### skill-creator
+Claude Code 스킬을 생성하고 패키징하는 가이드 스킬입니다.
+
+```
+User: create a new skill for database migrations
+→ 요구사항 분석 → init_skill.py 스캐폴딩 → SKILL.md 작성 → package_skill.py 배포
+```
+
+포함 스크립트:
+- `init_skill.py` — 스킬 디렉토리 초기화
+- `package_skill.py` — 검증 + zip 패키징
+- `quick_validate.py` — 빠른 유효성 검사
+
 ## MCP Servers
 
 ### Terraform
@@ -111,9 +125,12 @@ moon-devkit/
 ├── skills/
 │   ├── commit-with-review/
 │   │   └── SKILL.md         # 리뷰+커밋 스킬
-│   └── feature-planner/
-│       ├── SKILL.md          # 피처 계획 스킬
-│       └── plan-template.md  # 계획 문서 템플릿
+│   ├── feature-planner/
+│   │   ├── SKILL.md          # 피처 계획 스킬
+│   │   └── plan-template.md  # 계획 문서 템플릿
+│   └── skill-creator/
+│       ├── SKILL.md          # 스킬 생성 가이드
+│       └── scripts/          # init, package, validate 스크립트
 ├── hooks/
 │   └── hooks.json            # SessionStart 훅
 ├── README.md
